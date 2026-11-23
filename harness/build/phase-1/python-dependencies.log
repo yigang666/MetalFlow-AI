@@ -1,0 +1,6 @@
+2026-11-24 SGT
+Command: pip-audit --timeout 20 -r backend/requirements.txt
+Initial resolution: Starlette 0.52.1
+Exit 1. Reported five unique advisories: PYSEC-2026-161, PYSEC-2026-2281, PYSEC-2026-2280, PYSEC-2026-249, PYSEC-2026-248.
+Repair 1: FastAPI 0.165.0 and Starlette 1.10.0; test client moved to httpx2 2.16.2.
+Rerun exit 0: No known vulnerabilities found.

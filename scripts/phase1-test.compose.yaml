@@ -1,0 +1,22 @@
+services:
+  db:
+    volumes: !reset []
+    tmpfs:
+      - /var/lib/postgresql/data
+
+  backend:
+    ports: !reset []
+
+  frontend:
+    ports: !reset []
+
+  tests:
+    build:
+      context: ./backend
+      target: test
+    environment:
+      DATABASE_ADMIN_URL: postgresql+psycopg://metaflow_admin:${DATABASE_ADMIN_PASSWORD:?Missing sandbox credentials}@db:5432/metaflow
+      DATABASE_URL: postgresql+psycopg://metaflow_app:${DATABASE_APP_PASSWORD:?Missing sandbox credentials}@db:5432/metaflow
+      SANDBOX_PASSWORD: ${SANDBOX_PASSWORD:?Missing sandbox credentials}
+      METALFLOW_TEST_SANDBOX: "1"
+    profiles: [test]

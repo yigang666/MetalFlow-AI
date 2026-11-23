@@ -1,0 +1,244 @@
+ Image metalflow-p1-a53-migrate Building 
+ Image metalflow-p1-a53-backend Building 
+ Image metalflow-p1-a53-frontend Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.64kB done
+#1 DONE 0.0s
+
+#2 [migrate internal] load build definition from Dockerfile
+#2 transferring dockerfile: 822B done
+#2 DONE 0.0s
+
+#3 [frontend internal] load build definition from Dockerfile
+#3 transferring dockerfile: 491B done
+#3 DONE 0.0s
+
+#4 [backend internal] load metadata for docker.io/library/python:3.13-slim
+#4 ...
+
+#5 [frontend internal] load metadata for docker.io/library/node:22-bookworm-slim
+#5 DONE 0.5s
+
+#6 [frontend build 1/6] FROM docker.io/library/node:22-bookworm-slim@sha256:e9f565d32859f0cbfb52125eafe8be39390f24dac302dc3cdf566e8ba3ab21ee
+#6 resolve docker.io/library/node:22-bookworm-slim@sha256:e9f565d32859f0cbfb52125eafe8be39390f24dac302dc3cdf566e8ba3ab21ee done
+#6 sha256:97752f0f4999370a77b7fbca190f4cf2d270a68e3af6042e319683153fbfa75a 449B / 449B 0.3s done
+#6 sha256:85d8253b4d528a92358f74b39b0810d9b6a05f435ab1af1aa5319a5dc6877e77 1.71MB / 1.71MB 0.6s done
+#6 sha256:f5d21ada3c7e75a9f414655c748cf3ac9a08a2864408d4d4160436974ddbeac2 3.31kB / 3.31kB 0.6s done
+#6 sha256:2d66c782e4847b8495b17a4b86be1159aa13d140fe4fd17cb1d536953d5114c6 28.14MB / 28.14MB 2.5s done
+#6 sha256:4b9ff286f3188651cec5acfe909dd6d36ba3deba52815d38e5b74bf205f7fb4c 50.04MB / 50.04MB 2.5s done
+#6 extracting sha256:2d66c782e4847b8495b17a4b86be1159aa13d140fe4fd17cb1d536953d5114c6 1.8s done
+#6 extracting sha256:f5d21ada3c7e75a9f414655c748cf3ac9a08a2864408d4d4160436974ddbeac2 done
+#6 extracting sha256:4b9ff286f3188651cec5acfe909dd6d36ba3deba52815d38e5b74bf205f7fb4c 1.0s done
+#6 extracting sha256:85d8253b4d528a92358f74b39b0810d9b6a05f435ab1af1aa5319a5dc6877e77 0.0s done
+#6 extracting sha256:97752f0f4999370a77b7fbca190f4cf2d270a68e3af6042e319683153fbfa75a done
+#6 DONE 5.5s
+
+#7 [frontend build 2/6] WORKDIR /app
+#7 DONE 0.3s
+
+#4 [backend internal] load metadata for docker.io/library/python:3.13-slim
+#4 DONE 0.5s
+
+#8 [migrate internal] load .dockerignore
+#8 transferring context: 93B done
+#8 DONE 0.0s
+
+#9 [frontend internal] load .dockerignore
+#9 transferring context: 79B done
+#9 DONE 0.0s
+
+#10 [backend internal] load build context
+#10 transferring context: 10.55kB 0.0s done
+#10 DONE 0.0s
+
+#11 [migrate internal] load build context
+#11 transferring context: 9.34kB 0.0s done
+#11 DONE 0.0s
+
+#12 [backend base 1/5] FROM docker.io/library/python:3.13-slim@sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90
+#12 resolve docker.io/library/python:3.13-slim@sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90 0.1s done
+#12 DONE 0.1s
+
+#13 [backend base 4/5] RUN pip install --disable-pip-version-check --no-cache-dir -r requirements.txt
+#13 CACHED
+
+#14 [backend base 5/5] RUN groupadd --system metaflow && useradd --system --no-create-home --gid metaflow metaflow
+#14 CACHED
+
+#15 [backend base 3/5] COPY requirements.txt ./
+#15 CACHED
+
+#16 [backend runtime 1/1] COPY app ./app
+#16 CACHED
+
+#17 [migrate admin 2/3] COPY alembic ./alembic
+#17 CACHED
+
+#18 [migrate base 2/5] WORKDIR /app
+#18 CACHED
+
+#19 [migrate base 3/5] COPY requirements.txt ./
+#19 CACHED
+
+#20 [migrate base 5/5] RUN groupadd --system metaflow && useradd --system --no-create-home --gid metaflow metaflow
+#20 CACHED
+
+#21 [migrate admin 1/3] COPY alembic.ini ./
+#21 CACHED
+
+#22 [migrate base 4/5] RUN pip install --disable-pip-version-check --no-cache-dir -r requirements.txt
+#22 CACHED
+
+#23 [migrate admin 3/3] COPY db_admin ./db_admin
+#23 CACHED
+
+#24 [migrate] exporting to image
+#24 ...
+
+#25 [frontend build 3/6] COPY package.json package-lock.json ./
+#25 DONE 0.0s
+
+#26 [frontend internal] load build context
+#26 transferring context: 251.81kB 0.0s done
+#26 DONE 0.0s
+
+#24 [migrate] exporting to image
+#24 exporting layers done
+#24 exporting manifest sha256:bcb926b6f90cea60ae7f980868f6b9e0e2551cd8b0de832266218bf860a7bc73 done
+#24 exporting config sha256:1441fd32faf0fbb35c355365c2a98648cc4a8cd9af90f0daf38f246ffac6523a 0.1s done
+#24 exporting attestation manifest sha256:9ff8c84f1e0108273d1c61421aff0ed74f21cc73d4da9548ad9c537fd03f2ef7
+#24 ...
+
+#27 [backend] exporting to image
+#27 exporting layers done
+#27 exporting manifest sha256:c14c3a8b2f52b8b3558af03367454f85b9d268338dbc66b1716bc9386932a9cc done
+#27 exporting config sha256:1dc110b8c472d94430806443e7197d0a00dfeee4948785e5d6012b141d8b73ab done
+#27 exporting attestation manifest sha256:70b82f3381ba57151c72be841c1b131e6b5f4bbb13dc15834002ec5067d67a56 0.1s done
+#27 exporting manifest list sha256:90886b5ac389d3b684704b5aacf363fa06e91e6d15cd5b6ece7ee54708294508 0.0s done
+#27 naming to docker.io/library/metalflow-p1-a53-backend:latest 0.0s done
+#27 unpacking to docker.io/library/metalflow-p1-a53-backend:latest 0.0s done
+#27 DONE 0.3s
+
+#24 [migrate] exporting to image
+#24 exporting attestation manifest sha256:9ff8c84f1e0108273d1c61421aff0ed74f21cc73d4da9548ad9c537fd03f2ef7 0.1s done
+#24 exporting manifest list sha256:df48a1523757f161d52efc90ede94681f95bd9aec3ddc9eb9dab53fd3e4c1b50 0.0s done
+#24 naming to docker.io/library/metalflow-p1-a53-migrate:latest done
+#24 unpacking to docker.io/library/metalflow-p1-a53-migrate:latest 0.0s done
+#24 DONE 0.3s
+
+#28 [frontend build 4/6] RUN npm ci
+#28 5.532 npm warn deprecated eslint@9.39.5: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+#28 ...
+
+#29 [backend] resolving provenance for metadata file
+#29 DONE 0.0s
+
+#30 [migrate] resolving provenance for metadata file
+#30 DONE 0.0s
+
+#28 [frontend build 4/6] RUN npm ci
+#28 11.21 
+#28 11.21 added 370 packages, and audited 377 packages in 11s
+#28 11.21 
+#28 11.21 151 packages are looking for funding
+#28 11.21   run `npm fund` for details
+#28 11.21 
+#28 11.21 found 0 vulnerabilities
+#28 11.21 npm notice
+#28 11.21 npm notice New major version of npm available! 10.9.9 -> 12.2.3
+#28 11.21 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.3
+#28 11.21 npm notice To update run: npm install -g npm@12.2.3
+#28 11.21 npm notice
+#28 DONE 12.0s
+
+#31 [frontend build 5/6] COPY . .
+#31 DONE 0.1s
+
+#32 [frontend build 6/6] RUN npm run build
+#32 0.267 
+#32 0.267 > metalflow-frontend@0.1.0 build
+#32 0.267 > next build --webpack
+#32 0.267 
+#32 0.633 ▲ Next.js 16.4.6 (webpack)
+#32 0.670 ✓ Running next.config.ts took 37ms
+#32 0.680 
+#32 0.698   Creating an optimized production build ...
+#32 5.341 ✓ Compiled successfully in 3.3s
+#32 5.343   Running TypeScript ...
+#32 5.348 
+#32 5.348   We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
+#32 5.348   The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+#32 5.348 
+#32 5.348   	- allowJs was set to true
+#32 5.348 
+#32 6.506   Finished TypeScript in 1163ms ...
+#32 6.508   Collecting page data using 4 workers ...
+#32 7.106   Generating static pages using 4 workers (0/3) ...
+#32 7.437 ✓ Generating static pages using 4 workers (3/3) in 331ms
+#32 7.480   Finalizing page optimization ...
+#32 7.480   Collecting build traces ...
+#32 19.80 
+#32 19.81 Route (app)
+#32 19.81 ┌ ƒ /
+#32 19.81 └ ○ /_not-found
+#32 19.81 
+#32 19.81 
+#32 19.81 ○  (Static)   prerendered as static content
+#32 19.81 ƒ  (Dynamic)  server-rendered on demand
+#32 19.81 
+#32 DONE 20.0s
+
+#33 [frontend stage-1 3/4] COPY --from=build --chown=node:node /app/.next/standalone ./
+#33 DONE 0.3s
+
+#34 [frontend stage-1 4/4] COPY --from=build --chown=node:node /app/.next/static ./.next/static
+#34 DONE 0.1s
+
+#35 [frontend] exporting to image
+#35 exporting layers
+#35 exporting layers 2.6s done
+#35 exporting manifest sha256:ebcd0417378cdc4316a5be89bdde2971cea82461c75828217c48243378f924c3 0.1s done
+#35 exporting config sha256:27b5dcc3f5d1eedd6440e9110e3717e1470c985c7068a083a45ff1b049b3f9f5 0.0s done
+#35 exporting attestation manifest sha256:8d4cb20864cd3c525c96715477c6d14c9c7ed574db199a0d805a99ac88065893 0.1s done
+#35 exporting manifest list sha256:14834ccdc96fa479ccdfe56c659978ad4926c9eb99d103243be535557ac9e343
+#35 exporting manifest list sha256:14834ccdc96fa479ccdfe56c659978ad4926c9eb99d103243be535557ac9e343 0.1s done
+#35 naming to docker.io/library/metalflow-p1-a53-frontend:latest 0.0s done
+#35 unpacking to docker.io/library/metalflow-p1-a53-frontend:latest
+#35 unpacking to docker.io/library/metalflow-p1-a53-frontend:latest 0.9s done
+#35 DONE 3.9s
+
+#36 [frontend] resolving provenance for metadata file
+#36 DONE 0.1s
+ Image metalflow-p1-a53-migrate Built 
+ Image metalflow-p1-a53-backend Built 
+ Image metalflow-p1-a53-frontend Built 
+ Container metalflow-p1-a53-db-1 Recreate 
+ Container metalflow-p1-a53-db-1 Recreated 
+ Container metalflow-p1-a53-migrate-1 Recreate 
+ Container metalflow-p1-a53-migrate-1 Recreated 
+ Container metalflow-p1-a53-backend-1 Recreate 
+ Container metalflow-p1-a53-backend-1 Recreated 
+ Container metalflow-p1-a53-frontend-1 Creating 
+ Container metalflow-p1-a53-frontend-1 Created 
+ Container metalflow-p1-a53-db-1 Starting 
+ Container metalflow-p1-a53-db-1 Started 
+ Container metalflow-p1-a53-db-1 Waiting 
+ Container metalflow-p1-a53-db-1 Healthy 
+ Container metalflow-p1-a53-migrate-1 Starting 
+ Container metalflow-p1-a53-migrate-1 Started 
+ Container metalflow-p1-a53-migrate-1 Waiting 
+ Container metalflow-p1-a53-migrate-1 Exited 
+ Container metalflow-p1-a53-backend-1 Starting 
+ Container metalflow-p1-a53-backend-1 Started 
+ Container metalflow-p1-a53-backend-1 Waiting 
+ Container metalflow-p1-a53-backend-1 Healthy 
+ Container metalflow-p1-a53-frontend-1 Starting 
+ Container metalflow-p1-a53-frontend-1 Started 
+ Container metalflow-p1-a53-backend-1 Waiting 
+ Container metalflow-p1-a53-frontend-1 Waiting 
+ Container metalflow-p1-a53-db-1 Waiting 
+ Container metalflow-p1-a53-migrate-1 Waiting 
+ Container metalflow-p1-a53-migrate-1 Exited 
+ Container metalflow-p1-a53-backend-1 Healthy 
+ Container metalflow-p1-a53-db-1 Healthy 
+ Container metalflow-p1-a53-frontend-1 Healthy 

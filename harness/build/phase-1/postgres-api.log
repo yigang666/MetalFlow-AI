@@ -1,0 +1,30 @@
+waiting for server to start.... done
+server started
+postgres (PostgreSQL) 16.13 (Homebrew)
+Python 3.12.13
+0001_foundation (head)
+============================= test session starts ==============================
+platform darwin -- Python 3.12.13, pytest-9.2.0, pluggy-1.7.0 -- <test-venv>/bin/python
+rootdir: <workspace>/backend
+plugins: platformdirs-4.14.8, anyio-4.16.0
+collecting ... collected 15 items
+
+tests/test_foundation.py::test_readiness_and_auth_required PASSED        [  6%]
+tests/test_foundation.py::test_generic_invalid_credentials_and_disabled PASSED [ 13%]
+tests/test_foundation.py::test_changes_apply_to_existing_sessions PASSED [ 20%]
+tests/test_foundation.py::test_invalid_input_does_not_echo_password PASSED [ 26%]
+tests/test_foundation.py::test_role_matrix[owner-200-200] PASSED         [ 33%]
+tests/test_foundation.py::test_role_matrix[admin-200-403] PASSED         [ 40%]
+tests/test_foundation.py::test_role_matrix[sales-403-403] PASSED         [ 46%]
+tests/test_foundation.py::test_role_matrix[auditor-403-200] PASSED       [ 53%]
+tests/test_foundation.py::test_bidirectional_tenant_isolation_and_scope_spoofing PASSED [ 60%]
+tests/test_foundation.py::test_pagination_validation PASSED              [ 66%]
+tests/test_foundation.py::test_refresh_is_single_use_and_logout_revokes PASSED [ 73%]
+tests/test_foundation.py::test_denial_audit_is_visible_only_in_same_tenant PASSED [ 80%]
+tests/test_foundation.py::test_rls_fails_closed_and_transaction_scope_resets PASSED [ 86%]
+tests/test_foundation.py::test_rls_rejects_cross_tenant_insert_and_audit_mutation PASSED [ 93%]
+tests/test_foundation.py::test_session_uses_digest_and_expired_session_is_rejected PASSED [100%]
+
+============================== 15 passed in 0.86s ==============================
+...............                                                          [100%]
+15 passed in 0.84s

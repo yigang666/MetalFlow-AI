@@ -1,0 +1,75 @@
+waiting for server to start.... done
+server started
+postgres (PostgreSQL) 16.13 (Homebrew)
+Python 3.12.13
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "<workspace>/backend/db_admin/provision.py", line 52, in <module>
+    main()
+  File "<workspace>/backend/db_admin/provision.py", line 18, in main
+    with engine.begin() as connection:
+         ^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/lib/python3.12/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3249, in begin
+    with self.connect() as conn:
+         ^^^^^^^^^^^^^^
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3285, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3309, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 711, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/pool/impl.py", line 175, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 673, in __init__
+    self.__connect()
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 913, in __connect
+    )._exec_w_sync_on_first_run(self.dbapi_connection, self)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/event/attr.py", line 501, in _exec_w_sync_on_first_run
+    self(*args, **kw)
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/event/attr.py", line 515, in __call__
+    fn(*args, **kw)
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 2000, in go
+    return once_fn(*arg, **kw)
+           ^^^^^^^^^^^^^^^^^^^
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/engine/create.py", line 767, in first_connect
+    dialect.initialize(c)
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/psycopg.py", line 467, in initialize
+    super().initialize(connection)
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/base.py", line 3332, in initialize
+    super().initialize(connection)
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 528, in initialize
+    self.server_version_info = self._get_server_version_info(
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<test-venv>/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/base.py", line 3603, in _get_server_version_info
+    m = re.match(
+        ^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/lib/python3.12/re/__init__.py", line 167, in match
+    return _compile(pattern, flags).match(string)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: cannot use a string pattern on a bytes-like object

@@ -1,0 +1,10 @@
+.DS_Store
+.env.sandbox
+.env.sandbox.*
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+frontend/node_modules/
+frontend/.next/
+frontend/*.tsbuildinfo

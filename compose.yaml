@@ -1,0 +1,63 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: metaflow
+      POSTGRES_USER: metaflow_admin
+      POSTGRES_PASSWORD: ${DATABASE_ADMIN_PASSWORD:?Run scripts/dev.sh up to initialize sandbox credentials}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-h", "127.0.0.1", "-U", "metaflow_admin", "-d", "metaflow"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  migrate:
+    build:
+      context: ./backend
+      target: admin
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_ADMIN_URL: postgresql+psycopg://metaflow_admin:${DATABASE_ADMIN_PASSWORD:?Missing sandbox credentials}@db:5432/metaflow
+      DATABASE_APP_PASSWORD: ${DATABASE_APP_PASSWORD:?Missing sandbox credentials}
+      SANDBOX_PASSWORD: ${SANDBOX_PASSWORD:?Missing sandbox credentials}
+    command: ["sh", "-ec", "python -m db_admin.provision && python -m alembic upgrade head && python -m db_admin.seed"]
+
+  backend:
+    build:
+      context: ./backend
+      target: runtime
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    environment:
+      DATABASE_URL: postgresql+psycopg://metaflow_app:${DATABASE_APP_PASSWORD:?Missing sandbox credentials}@db:5432/metaflow
+    ports:
+      - "127.0.0.1:${METALFLOW_API_PORT:-8000}:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health', timeout=3)"]
+      interval: 3s
+      timeout: 4s
+      retries: 30
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      API_BASE_URL: http://backend:8000
+      APP_ORIGIN: http://localhost:${METALFLOW_WEB_PORT:-3000}
+    ports:
+      - "127.0.0.1:${METALFLOW_WEB_PORT:-3000}:3000"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/').then(r => { if (!r.ok) process.exit(1) }).catch(() => process.exit(1))"]
+      interval: 3s
+      timeout: 4s
+      retries: 30
+
+volumes:
+  pgdata:

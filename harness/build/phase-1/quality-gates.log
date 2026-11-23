@@ -1,0 +1,21 @@
+All checks passed!
+Success: no issues found in 6 source files
+============================= test session starts ==============================
+platform darwin -- Python 3.12.13, pytest-9.2.0, pluggy-1.7.0 -- <test-venv>/bin/python
+rootdir: <workspace>
+plugins: platformdirs-4.14.8, anyio-4.16.0
+collecting ... collected 3 items
+
+backend/tests/test_security_unit.py::test_scrypt_password_vector PASSED  [ 33%]
+backend/tests/test_security_unit.py::test_scrypt_password_match_is_exact PASSED [ 66%]
+backend/tests/test_security_unit.py::test_session_digest_is_sha256 PASSED [100%]
+
+============================== 3 passed in 0.88s ===============================
+
+> metalflow-frontend@0.1.0 lint
+> eslint .
+
+
+> metalflow-frontend@0.1.0 typecheck
+> tsc --noEmit --incremental false
+

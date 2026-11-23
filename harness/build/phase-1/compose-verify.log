@@ -1,0 +1,407 @@
+Starting isolated Phase 1 stack: metalflow-verify-9b97e8a03242
+ Image metalflow-verify-9b97e8a03242-migrate Building 
+ Image metalflow-verify-9b97e8a03242-backend Building 
+ Image metalflow-verify-9b97e8a03242-frontend Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.71kB done
+#1 DONE 0.0s
+
+#2 [backend internal] load build definition from Dockerfile
+#2 transferring dockerfile: 910B done
+#2 DONE 0.0s
+
+#3 [frontend internal] load build definition from Dockerfile
+#3 transferring dockerfile: 491B 0.0s done
+#3 DONE 0.0s
+
+#4 [migrate internal] load metadata for docker.io/library/python:3.13-slim
+#4 DONE 1.2s
+
+#5 [backend internal] load .dockerignore
+#5 transferring context: 93B done
+#5 DONE 0.0s
+
+#6 [backend internal] load build context
+#6 transferring context: 91B done
+#6 DONE 0.0s
+
+#7 [migrate internal] load build context
+#7 transferring context: 2.47kB done
+#7 DONE 0.0s
+
+#8 [migrate base 1/5] FROM docker.io/library/python:3.13-slim@sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90
+#8 resolve docker.io/library/python:3.13-slim@sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90 0.0s done
+#8 DONE 0.0s
+
+#9 [migrate base 5/5] RUN groupadd --system metaflow && useradd --system --no-create-home --gid metaflow metaflow
+#9 CACHED
+
+#10 [migrate base 3/5] COPY requirements.txt ./
+#10 CACHED
+
+#11 [migrate base 4/5] RUN pip install --disable-pip-version-check --no-cache-dir -r requirements.txt
+#11 CACHED
+
+#12 [migrate admin 1/3] COPY alembic.ini ./
+#12 CACHED
+
+#13 [migrate admin 2/3] COPY alembic ./alembic
+#13 CACHED
+
+#14 [backend base 5/5] RUN groupadd --system metaflow && useradd --system --no-create-home --gid metaflow metaflow
+#14 CACHED
+
+#15 [migrate base 2/5] WORKDIR /app
+#15 CACHED
+
+#16 [backend base 4/5] RUN pip install --disable-pip-version-check --no-cache-dir -r requirements.txt
+#16 CACHED
+
+#17 [backend base 3/5] COPY requirements.txt ./
+#17 CACHED
+
+#18 [backend runtime 1/1] COPY app ./app
+#18 CACHED
+
+#19 [backend] exporting to image
+#19 exporting layers done
+#19 exporting manifest sha256:99e404d607708e1644f70c0d5db12f81ce90262c4869767b39a8bfb0aa4ecf42 0.0s done
+#19 exporting config sha256:881d77dfb21773434079345fdc022cb3c9388c45a242d0ed4fd13acbae328942
+#19 ...
+
+#20 [migrate admin 3/3] COPY db_admin ./db_admin
+#20 DONE 0.0s
+
+#19 [backend] exporting to image
+#19 exporting config sha256:881d77dfb21773434079345fdc022cb3c9388c45a242d0ed4fd13acbae328942 0.0s done
+#19 exporting attestation manifest sha256:73c66e0eb668ab46117bbe95bd0d05d82211aac888e4a183ceffd4aa07f20fee 0.1s done
+#19 exporting manifest list sha256:d119f10a805b65c132fbb93ff88b60ff606baa44dd90f59dfb9006fe9e03a014 0.0s done
+#19 naming to docker.io/library/metalflow-verify-9b97e8a03242-backend:latest
+#19 naming to docker.io/library/metalflow-verify-9b97e8a03242-backend:latest done
+#19 unpacking to docker.io/library/metalflow-verify-9b97e8a03242-backend:latest 0.1s done
+#19 ...
+
+#21 [frontend internal] load metadata for docker.io/library/node:22-bookworm-slim
+#21 DONE 1.7s
+
+#19 [backend] exporting to image
+#19 DONE 0.4s
+
+#22 [frontend internal] load .dockerignore
+#22 transferring context: 79B 0.0s done
+#22 DONE 0.0s
+
+#23 [frontend internal] load build context
+#23 DONE 0.0s
+
+#24 [frontend build 1/6] FROM docker.io/library/node:22-bookworm-slim@sha256:e9f565d32859f0cbfb52125eafe8be39390f24dac302dc3cdf566e8ba3ab21ee
+#24 resolve docker.io/library/node:22-bookworm-slim@sha256:e9f565d32859f0cbfb52125eafe8be39390f24dac302dc3cdf566e8ba3ab21ee
+#24 resolve docker.io/library/node:22-bookworm-slim@sha256:e9f565d32859f0cbfb52125eafe8be39390f24dac302dc3cdf566e8ba3ab21ee 0.3s done
+#24 DONE 0.4s
+
+#23 [frontend internal] load build context
+#23 transferring context: 492B 0.0s done
+#23 DONE 0.0s
+
+#25 [frontend build 5/6] COPY . .
+#25 CACHED
+
+#26 [frontend stage-1 3/4] COPY --from=build --chown=node:node /app/.next/standalone ./
+#26 CACHED
+
+#27 [frontend build 6/6] RUN npm run build
+#27 CACHED
+
+#28 [frontend build 3/6] COPY package.json package-lock.json ./
+#28 CACHED
+
+#29 [frontend build 2/6] WORKDIR /app
+#29 CACHED
+
+#30 [frontend build 4/6] RUN npm ci
+#30 CACHED
+
+#31 [frontend stage-1 4/4] COPY --from=build --chown=node:node /app/.next/static ./.next/static
+#31 CACHED
+
+#32 [frontend] exporting to image
+#32 exporting layers 0.0s done
+#32 exporting manifest sha256:a434b70531ea9a79a9b47dc459cb4ed1cac62009bb5e373040df112c82aa743b 0.0s done
+#32 exporting config sha256:8708f2219787dd1ffec80b5bd9c759e177d8db99f3b40a3af8835bc943b05b94
+#32 ...
+
+#33 [migrate] exporting to image
+#33 exporting layers 0.2s done
+#33 exporting manifest sha256:3c34145aa420ab555b8a6b3b6a0ba6a82bbeda0589d16cb16513bf70e812c7af 0.1s done
+#33 exporting config sha256:496a04f0173537aaf7f24136e400a6a92ae1324011fbe27d3e8280a792152c1b 0.1s done
+#33 exporting attestation manifest sha256:b244a6afc4f167090370905a3e26b0313122cd18b0ca01ab65d55cc4cf0a37a1 0.2s done
+#33 exporting manifest list sha256:15939d4caa0e68622d6f9622e9fc50984e8cb6d2bc19456201e1cbcea7a795a6 0.0s done
+#33 naming to docker.io/library/metalflow-verify-9b97e8a03242-migrate:latest 0.0s done
+#33 unpacking to docker.io/library/metalflow-verify-9b97e8a03242-migrate:latest 0.1s done
+#33 DONE 1.1s
+
+#32 [frontend] exporting to image
+#32 exporting config sha256:8708f2219787dd1ffec80b5bd9c759e177d8db99f3b40a3af8835bc943b05b94 0.1s done
+#32 exporting attestation manifest sha256:bb690e026f5a6e5e024c99ab7063595b2a082dd21494354c6ce4b52d9020e629
+#32 exporting attestation manifest sha256:bb690e026f5a6e5e024c99ab7063595b2a082dd21494354c6ce4b52d9020e629 0.1s done
+#32 exporting manifest list sha256:a565f9e2855f464ec8a1121998c3d14b39de4f98ee9ed633b54215dbf94d67f2 0.0s done
+#32 naming to docker.io/library/metalflow-verify-9b97e8a03242-frontend:latest 0.0s done
+#32 unpacking to docker.io/library/metalflow-verify-9b97e8a03242-frontend:latest 0.0s done
+#32 DONE 0.3s
+
+#34 [backend] resolving provenance for metadata file
+#34 DONE 0.0s
+
+#35 [frontend] resolving provenance for metadata file
+#35 DONE 0.0s
+
+#36 [migrate] resolving provenance for metadata file
+#36 DONE 0.1s
+ Image metalflow-verify-9b97e8a03242-migrate Built 
+ Image metalflow-verify-9b97e8a03242-backend Built 
+ Image metalflow-verify-9b97e8a03242-frontend Built 
+ Network metalflow-verify-9b97e8a03242_default Creating 
+ Network metalflow-verify-9b97e8a03242_default Created 
+ Container metalflow-verify-9b97e8a03242-db-1 Creating 
+ Container metalflow-verify-9b97e8a03242-db-1 Created 
+ Container metalflow-verify-9b97e8a03242-migrate-1 Creating 
+ Container metalflow-verify-9b97e8a03242-migrate-1 Created 
+ Container metalflow-verify-9b97e8a03242-backend-1 Creating 
+ Container metalflow-verify-9b97e8a03242-backend-1 Created 
+ Container metalflow-verify-9b97e8a03242-frontend-1 Creating 
+ Container metalflow-verify-9b97e8a03242-frontend-1 Created 
+ Container metalflow-verify-9b97e8a03242-db-1 Starting 
+ Container metalflow-verify-9b97e8a03242-db-1 Started 
+ Container metalflow-verify-9b97e8a03242-db-1 Waiting 
+ Container metalflow-verify-9b97e8a03242-db-1 Healthy 
+ Container metalflow-verify-9b97e8a03242-migrate-1 Starting 
+ Container metalflow-verify-9b97e8a03242-migrate-1 Started 
+ Container metalflow-verify-9b97e8a03242-migrate-1 Waiting 
+ Container metalflow-verify-9b97e8a03242-migrate-1 Exited 
+ Container metalflow-verify-9b97e8a03242-backend-1 Starting 
+ Container metalflow-verify-9b97e8a03242-backend-1 Started 
+ Container metalflow-verify-9b97e8a03242-backend-1 Waiting 
+ Container metalflow-verify-9b97e8a03242-backend-1 Healthy 
+ Container metalflow-verify-9b97e8a03242-frontend-1 Starting 
+ Container metalflow-verify-9b97e8a03242-frontend-1 Started 
+ Container metalflow-verify-9b97e8a03242-db-1 Waiting 
+ Container metalflow-verify-9b97e8a03242-migrate-1 Waiting 
+ Container metalflow-verify-9b97e8a03242-backend-1 Waiting 
+ Container metalflow-verify-9b97e8a03242-frontend-1 Waiting 
+ Container metalflow-verify-9b97e8a03242-backend-1 Healthy 
+ Container metalflow-verify-9b97e8a03242-db-1 Healthy 
+ Container metalflow-verify-9b97e8a03242-migrate-1 Exited 
+ Container metalflow-verify-9b97e8a03242-frontend-1 Healthy 
+ Image metalflow-verify-9b97e8a03242-tests Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 626B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 910B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.13-slim
+#3 DONE 1.2s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 93B 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 12.37kB 0.0s done
+#5 DONE 0.1s
+
+#6 [base 1/5] FROM docker.io/library/python:3.13-slim@sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90
+#6 resolve docker.io/library/python:3.13-slim@sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90 0.1s done
+#6 DONE 0.1s
+
+#7 [base 2/5] WORKDIR /app
+#7 CACHED
+
+#8 [base 4/5] RUN pip install --disable-pip-version-check --no-cache-dir -r requirements.txt
+#8 CACHED
+
+#9 [base 3/5] COPY requirements.txt ./
+#9 CACHED
+
+#10 [base 5/5] RUN groupadd --system metaflow && useradd --system --no-create-home --gid metaflow metaflow
+#10 CACHED
+
+#11 [runtime 1/1] COPY app ./app
+#11 CACHED
+
+#12 [test 1/3] COPY requirements-dev.txt ./
+#12 DONE 0.1s
+
+#13 [test 2/3] RUN pip install --disable-pip-version-check --no-cache-dir -r requirements-dev.txt
+#13 2.020 Requirement already satisfied: fastapi==0.165.0 in /usr/local/lib/python3.13/site-packages (from -r /app/requirements.txt (line 1)) (0.165.0)
+#13 2.020 Requirement already satisfied: starlette==1.10.0 in /usr/local/lib/python3.13/site-packages (from -r /app/requirements.txt (line 2)) (1.10.0)
+#13 2.021 Requirement already satisfied: uvicorn==0.40.0 in /usr/local/lib/python3.13/site-packages (from -r /app/requirements.txt (line 3)) (0.40.0)
+#13 2.021 Requirement already satisfied: SQLAlchemy==2.0.46 in /usr/local/lib/python3.13/site-packages (from -r /app/requirements.txt (line 4)) (2.0.46)
+#13 2.021 Requirement already satisfied: alembic==1.18.4 in /usr/local/lib/python3.13/site-packages (from -r /app/requirements.txt (line 5)) (1.18.4)
+#13 2.022 Requirement already satisfied: psycopg==3.3.2 in /usr/local/lib/python3.13/site-packages (from psycopg[binary]==3.3.2->-r /app/requirements.txt (line 6)) (3.3.2)
+#13 2.074 Collecting httpx2==2.16.2 (from -r requirements-dev.txt (line 2))
+#13 2.128   Downloading httpx2-2.16.2-py3-none-any.whl.metadata (10.0 kB)
+#13 2.474 Collecting mypy==2.4.1 (from -r requirements-dev.txt (line 3))
+#13 2.482   Downloading mypy-2.4.1-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (2.4 kB)
+#13 2.500 Collecting pytest==9.2.0 (from -r requirements-dev.txt (line 4))
+#13 2.508   Downloading pytest-9.2.0-py3-none-any.whl.metadata (7.9 kB)
+#13 2.673 Collecting ruff==0.17.6 (from -r requirements-dev.txt (line 5))
+#13 2.681   Downloading ruff-0.17.6-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (20 kB)
+#13 2.689 Requirement already satisfied: anyio>=4.1.0 in /usr/local/lib/python3.13/site-packages (from fastapi==0.165.0->-r /app/requirements.txt (line 1)) (4.16.0)
+#13 2.689 Requirement already satisfied: pydantic>=2.9.0 in /usr/local/lib/python3.13/site-packages (from fastapi==0.165.0->-r /app/requirements.txt (line 1)) (2.14.4)
+#13 2.689 Requirement already satisfied: typing-extensions>=4.8.0 in /usr/local/lib/python3.13/site-packages (from fastapi==0.165.0->-r /app/requirements.txt (line 1)) (4.16.0)
+#13 2.690 Requirement already satisfied: typing-inspection>=0.4.2 in /usr/local/lib/python3.13/site-packages (from fastapi==0.165.0->-r /app/requirements.txt (line 1)) (0.4.5)
+#13 2.690 Requirement already satisfied: annotated-doc>=0.0.2 in /usr/local/lib/python3.13/site-packages (from fastapi==0.165.0->-r /app/requirements.txt (line 1)) (0.0.7)
+#13 2.690 Requirement already satisfied: opentelemetry-api>=1.44.0 in /usr/local/lib/python3.13/site-packages (from fastapi==0.165.0->-r /app/requirements.txt (line 1)) (1.45.2)
+#13 2.693 Requirement already satisfied: click>=7.0 in /usr/local/lib/python3.13/site-packages (from uvicorn==0.40.0->-r /app/requirements.txt (line 3)) (8.5.1)
+#13 2.693 Requirement already satisfied: h11>=0.8 in /usr/local/lib/python3.13/site-packages (from uvicorn==0.40.0->-r /app/requirements.txt (line 3)) (0.16.0)
+#13 2.695 Requirement already satisfied: greenlet>=1 in /usr/local/lib/python3.13/site-packages (from SQLAlchemy==2.0.46->-r /app/requirements.txt (line 4)) (3.5.6)
+#13 2.696 Requirement already satisfied: Mako in /usr/local/lib/python3.13/site-packages (from alembic==1.18.4->-r /app/requirements.txt (line 5)) (1.4.3)
+#13 2.710 Collecting httpcore2==2.16.2 (from httpx2==2.16.2->-r requirements-dev.txt (line 2))
+#13 2.719   Downloading httpcore2-2.16.2-py3-none-any.whl.metadata (28 kB)
+#13 2.722 Requirement already satisfied: idna>=3.18 in /usr/local/lib/python3.13/site-packages (from httpx2==2.16.2->-r requirements-dev.txt (line 2)) (3.20)
+#13 2.733 Collecting truststore>=0.10 (from httpx2==2.16.2->-r requirements-dev.txt (line 2))
+#13 2.741   Downloading truststore-0.10.5-py3-none-any.whl.metadata (4.5 kB)
+#13 2.751 Collecting mypy_extensions>=1.0.0 (from mypy==2.4.1->-r requirements-dev.txt (line 3))
+#13 2.758   Downloading mypy_extensions-1.2.0-py3-none-any.whl.metadata (1.1 kB)
+#13 2.768 Collecting pathspec>=1.0.0 (from mypy==2.4.1->-r requirements-dev.txt (line 3))
+#13 2.776   Downloading pathspec-1.1.1-py3-none-any.whl.metadata (14 kB)
+#13 2.845 Collecting librt>=0.16.0 (from mypy==2.4.1->-r requirements-dev.txt (line 3))
+#13 2.853   Downloading librt-0.17.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (1.3 kB)
+#13 2.888 Collecting ast-serialize<1.0.0,>=0.12.1 (from mypy==2.4.1->-r requirements-dev.txt (line 3))
+#13 2.896   Downloading ast_serialize-0.13.1-cp39-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (1.4 kB)
+#13 2.909 Collecting iniconfig>=2 (from pytest==9.2.0->-r requirements-dev.txt (line 4))
+#13 2.916   Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+#13 2.930 Collecting packaging>=24 (from pytest==9.2.0->-r requirements-dev.txt (line 4))
+#13 2.938   Downloading packaging-26.4-py3-none-any.whl.metadata (3.5 kB)
+#13 2.949 Collecting pluggy<2,>=1.6 (from pytest==9.2.0->-r requirements-dev.txt (line 4))
+#13 2.957   Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+#13 2.973 Collecting pygments>=2.15 (from pytest==9.2.0->-r requirements-dev.txt (line 4))
+#13 2.980   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+#13 2.982 Requirement already satisfied: psycopg-binary==3.3.2 in /usr/local/lib/python3.13/site-packages (from psycopg[binary]==3.3.2->-r /app/requirements.txt (line 6)) (3.3.2)
+#13 2.992 Requirement already satisfied: annotated-types>=0.6.0 in /usr/local/lib/python3.13/site-packages (from pydantic>=2.9.0->fastapi==0.165.0->-r /app/requirements.txt (line 1)) (0.8.0)
+#13 2.992 Requirement already satisfied: pydantic-core==2.50.5 in /usr/local/lib/python3.13/site-packages (from pydantic>=2.9.0->fastapi==0.165.0->-r /app/requirements.txt (line 1)) (2.50.5)
+#13 2.996 Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.13/site-packages (from Mako->alembic==1.18.4->-r /app/requirements.txt (line 5)) (3.0.4)
+#13 3.006 Downloading httpx2-2.16.2-py3-none-any.whl (97 kB)
+#13 3.019 Downloading mypy-2.4.1-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (14.4 MB)
+#13 3.139    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 14.4/14.4 MB 127.3 MB/s  0:00:00
+#13 3.146 Downloading pytest-9.2.0-py3-none-any.whl (411 kB)
+#13 3.159 Downloading ruff-0.17.6-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (10.3 MB)
+#13 3.247    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.3/10.3 MB 117.5 MB/s  0:00:00
+#13 3.256 Downloading httpcore2-2.16.2-py3-none-any.whl (85 kB)
+#13 3.266 Downloading ast_serialize-0.13.1-cp39-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (1.3 MB)
+#13 3.275    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 179.3 MB/s  0:00:00
+#13 3.285 Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+#13 3.294 Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+#13 3.302 Downloading librt-0.17.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (589 kB)
+#13 3.310    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 589.8/589.8 kB 70.4 MB/s  0:00:00
+#13 3.319 Downloading mypy_extensions-1.2.0-py3-none-any.whl (5.1 kB)
+#13 3.328 Downloading packaging-26.4-py3-none-any.whl (140 kB)
+#13 3.336 Downloading pathspec-1.1.1-py3-none-any.whl (57 kB)
+#13 3.345 Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+#13 3.358    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 105.2 MB/s  0:00:00
+#13 3.365 Downloading truststore-0.10.5-py3-none-any.whl (19 kB)
+#13 3.490 Installing collected packages: truststore, ruff, pygments, pluggy, pathspec, packaging, mypy_extensions, iniconfig, ast-serialize, pytest, librt, httpcore2, mypy, httpx2
+#13 6.558 
+#13 6.560 Successfully installed ast-serialize-0.13.1 httpcore2-2.16.2 httpx2-2.16.2 iniconfig-2.3.1 librt-0.17.0 mypy-2.4.1 mypy_extensions-1.2.0 packaging-26.4 pathspec-1.1.1 pluggy-1.7.0 pygments-2.21.0 pytest-9.2.0 ruff-0.17.6 truststore-0.10.5
+#13 6.561 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#13 DONE 6.8s
+
+#14 [test 3/3] COPY tests ./tests
+#14 DONE 0.0s
+
+#15 exporting to image
+#15 exporting layers
+#15 exporting layers 3.7s done
+#15 exporting manifest sha256:ddf463fd35d233d42ee0ad2e8ffa0a4708c8f037353b7c69fe9431cca7bfa57c done
+#15 exporting config sha256:4314f0032aff5833cfb8f77e80bcf9bb1c01013d5edacfce41e4eb7bff7d2022 done
+#15 exporting attestation manifest sha256:3de213fb19f82308f296b4a3e41a4069815286cb88d59908cfbf3a5aeb067588 done
+#15 exporting manifest list sha256:14b653bb741cd2c00c135b6e9e9f34ef31e1f6a231179baaa6e5ea6263529a81 done
+#15 naming to docker.io/library/metalflow-verify-9b97e8a03242-tests:latest done
+#15 unpacking to docker.io/library/metalflow-verify-9b97e8a03242-tests:latest
+#15 unpacking to docker.io/library/metalflow-verify-9b97e8a03242-tests:latest 0.8s done
+#15 DONE 4.5s
+
+#16 resolving provenance for metadata file
+#16 DONE 0.0s
+ Image metalflow-verify-9b97e8a03242-tests Built 
+ Container metalflow-verify-9b97e8a03242-tests-run-d95e6a4cc88d Creating 
+ Container metalflow-verify-9b97e8a03242-tests-run-d95e6a4cc88d Created 
+All checks passed!
+Success: no issues found in 1 source file
+============================= test session starts ==============================
+platform linux -- Python 3.13.18, pytest-9.2.0, pluggy-1.7.0
+rootdir: /app
+plugins: anyio-4.16.0
+collected 18 items
+
+tests/test_foundation.py ...............                                 [ 83%]
+tests/test_security_unit.py ...                                          [100%]
+
+============================== 18 passed in 1.84s ==============================
+Rolling back schema on the disposable database
+ Container metalflow-verify-9b97e8a03242-frontend-1 Stopping 
+ Container metalflow-verify-9b97e8a03242-frontend-1 Stopped 
+ Container metalflow-verify-9b97e8a03242-backend-1 Stopping 
+ Container metalflow-verify-9b97e8a03242-backend-1 Stopped 
+ Container metalflow-verify-9b97e8a03242-migrate-run-a47760d4f129 Creating 
+ Container metalflow-verify-9b97e8a03242-migrate-run-a47760d4f129 Created 
+DO
+Reapplying migrations and starting the stack again
+ Container metalflow-verify-9b97e8a03242-migrate-run-10adf776a220 Creating 
+ Container metalflow-verify-9b97e8a03242-migrate-run-10adf776a220 Created 
+ Container metalflow-verify-9b97e8a03242-db-1 Running 
+ Container metalflow-verify-9b97e8a03242-db-1 Waiting 
+ Container metalflow-verify-9b97e8a03242-db-1 Healthy 
+ Container metalflow-verify-9b97e8a03242-migrate-1 Starting 
+ Container metalflow-verify-9b97e8a03242-migrate-1 Started 
+ Container metalflow-verify-9b97e8a03242-migrate-1 Waiting 
+ Container metalflow-verify-9b97e8a03242-migrate-1 Exited 
+ Container metalflow-verify-9b97e8a03242-backend-1 Starting 
+ Container metalflow-verify-9b97e8a03242-backend-1 Started 
+ Container metalflow-verify-9b97e8a03242-backend-1 Waiting 
+ Container metalflow-verify-9b97e8a03242-backend-1 Healthy 
+ Container metalflow-verify-9b97e8a03242-frontend-1 Starting 
+ Container metalflow-verify-9b97e8a03242-frontend-1 Started 
+ Container metalflow-verify-9b97e8a03242-backend-1 Waiting 
+ Container metalflow-verify-9b97e8a03242-frontend-1 Waiting 
+ Container metalflow-verify-9b97e8a03242-db-1 Waiting 
+ Container metalflow-verify-9b97e8a03242-migrate-1 Waiting 
+ Container metalflow-verify-9b97e8a03242-migrate-1 Exited 
+ Container metalflow-verify-9b97e8a03242-backend-1 Healthy 
+ Container metalflow-verify-9b97e8a03242-db-1 Healthy 
+ Container metalflow-verify-9b97e8a03242-frontend-1 Healthy 
+ Container metalflow-verify-9b97e8a03242-tests-run-fb0743722bed Creating 
+ Container metalflow-verify-9b97e8a03242-tests-run-fb0743722bed Created 
+All checks passed!
+Success: no issues found in 1 source file
+============================= test session starts ==============================
+platform linux -- Python 3.13.18, pytest-9.2.0, pluggy-1.7.0
+rootdir: /app
+plugins: anyio-4.16.0
+collected 18 items
+
+tests/test_foundation.py ...............                                 [ 83%]
+tests/test_security_unit.py ...                                          [100%]
+
+============================== 18 passed in 1.09s ==============================
+ Container metalflow-verify-9b97e8a03242-frontend-1 Stopping 
+ Container metalflow-verify-9b97e8a03242-frontend-1 Stopped 
+ Container metalflow-verify-9b97e8a03242-frontend-1 Removing 
+ Container metalflow-verify-9b97e8a03242-frontend-1 Removed 
+ Container metalflow-verify-9b97e8a03242-backend-1 Stopping 
+ Container metalflow-verify-9b97e8a03242-backend-1 Stopped 
+ Container metalflow-verify-9b97e8a03242-backend-1 Removing 
+ Container metalflow-verify-9b97e8a03242-backend-1 Removed 
+ Container metalflow-verify-9b97e8a03242-migrate-1 Stopping 
+ Container metalflow-verify-9b97e8a03242-migrate-1 Stopped 
+ Container metalflow-verify-9b97e8a03242-migrate-1 Removing 
+ Container metalflow-verify-9b97e8a03242-migrate-1 Removed 
+ Container metalflow-verify-9b97e8a03242-db-1 Stopping 
+ Container metalflow-verify-9b97e8a03242-db-1 Stopped 
+ Container metalflow-verify-9b97e8a03242-db-1 Removing 
+ Container metalflow-verify-9b97e8a03242-db-1 Removed 
+ Network metalflow-verify-9b97e8a03242_default Removing 
+ Network metalflow-verify-9b97e8a03242_default Removed 
