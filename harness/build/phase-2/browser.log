@@ -1,0 +1,4 @@
+PASS Customer 360, sales owner assignment, contact creation, and follow-up completion
+PASS assigned sales can read the customer; second tenant cannot
+PASS Excel preview, wrong-file rejection, and explicit duplicate confirmation
+PASS 500-row preview plus near-limit workbook submits without uploading preview results

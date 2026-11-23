@@ -38,3 +38,17 @@ API 的 [就绪端点](http://127.0.0.1:8000/api/v1/health) 和 [OpenAPI](http:/
 ```
 
 该脚本使用随机 Compose 项目和临时数据库，执行双租户 API 与数据库测试、迁移降级、重新升级和复测。项目无需外部账号。完整状态、测试证据和已知问题见 [Phase 1 Delivery Report](reports/PHASE_1.md)。
+
+## Phase 2 Customer CRM
+
+启动 Sandbox 后，以 `owner@example.test` 或 `admin@example.test` 登录并打开 **客户 CRM**。可创建客户、分配负责人、在 Customer 360 添加联系人和跟进任务。Sales 账户只看到自己负责的客户，可添加联系人和创建、完成跟进。
+
+使用 Python 生成一份合成 Excel 工作簿（目标路径须是新文件）。
+
+```bash
+python3 backend/tests/crm_workbook.py /tmp/sandbox-customers.xlsx
+```
+
+在 **Excel 导入** 选择该文件并预览，再重新选择同一文件提交。疑似重复行默认跳过，逐条勾选可创建独立客户。导入界面需要 JavaScript。支持名为 `Customers` 的工作表，按 `name,country,website,contact_name,email,phone,linkedin_url` 顺序填写表头。数据单元格使用文本格式以保留电话号码前导零。每份文件上限 2 MiB，最多 500 条数据。
+
+`./scripts/verify-phase1.sh` 运行当前全量 Sandbox 验收，包括 Phase 2。业务样本边界与验证证据见 [Phase 2 Delivery Report](reports/PHASE_2.md)。

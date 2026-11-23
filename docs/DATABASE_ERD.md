@@ -53,3 +53,7 @@
 | memory_source / payment_evidence | 客户记忆回溯原消息。到账确认引用可信记录，记录来源与授权 TBD |
 
 业务字段为后续阶段参考。报价计算口径、客户历史样本和数据合规详见 [OPEN_QUESTIONS.md](OPEN_QUESTIONS.md)。
+
+## Phase 2 CRM 实现
+
+[0002_crm](../backend/alembic/versions/0002_crm.py) 在 Phase 1 之上创建 `customers`、`customer_contacts`、`follow_up_tasks` 和 `crm_import_batches`。联系人和跟进任务通过租户一致性外键归属于客户，客户通过相同机制引用负责人。CRM 表都使用强制 RLS。审计表新增可空目标 ID 和详情字段，保留历史审计兼容性。导入回执按租户与请求摘要唯一。

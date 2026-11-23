@@ -33,7 +33,7 @@ generate_secret DATABASE_ADMIN_PASSWORD > "$env_file"
 generate_secret DATABASE_APP_PASSWORD >> "$env_file"
 generate_secret SANDBOX_PASSWORD >> "$env_file"
 
-echo "Starting isolated Phase 1 stack: $project"
+echo "Starting isolated MetalFlow Sandbox: $project"
 compose up --build --wait --wait-timeout 120
 compose run --rm --no-deps --build tests
 
@@ -46,8 +46,12 @@ BEGIN
     IF to_regclass('public.tenants') IS NOT NULL OR
        to_regclass('public.users') IS NOT NULL OR
        to_regclass('public.sessions') IS NOT NULL OR
-       to_regclass('public.audit_logs') IS NOT NULL THEN
-        RAISE EXCEPTION 'Phase 1 relations remain after downgrade';
+       to_regclass('public.audit_logs') IS NOT NULL OR
+       to_regclass('public.customers') IS NOT NULL OR
+       to_regclass('public.customer_contacts') IS NOT NULL OR
+       to_regclass('public.follow_up_tasks') IS NOT NULL OR
+       to_regclass('public.crm_import_batches') IS NOT NULL THEN
+        RAISE EXCEPTION 'Application relations remain after downgrade';
     END IF;
 END
 $$;

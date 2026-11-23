@@ -73,6 +73,8 @@ P1-02、P1-04、P1-05 在契约确定后可并行。Database Engineer 负责迁�
 
 ## Phase 2–8 条件计划
 
+2026-11-24 Phase 2 已完成本地 Sandbox 验收。脱敏客户 Excel 与业务去重规则仍待确认，Phase 3 等待明确批准。[Phase 2 Delivery Report](../reports/PHASE_2.md)
+
 以下是阶段范围获批前的计划。各阶段的 Scope 与验收见路线图总表。每阶段共同完成定义为满足对应验收、执行适用质量门、记录失败及阻塞、通过独立代码和安全审查，并交付 Markdown 报告给 Product Owner。交付报告在各阶段实际验证后生成。
 
 | 阶段 | 前置依赖 | 任务安排 | 非目标 | 验证计划 |

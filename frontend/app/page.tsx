@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { cookies } from "next/headers";
 import { signIn, signOut } from "./actions";
 import { apiRequest, readResponse, record, sessionCookie, sessionPattern } from "./api";
@@ -160,6 +161,11 @@ export default async function Home({
         </form>
       </section>
       {message && <p className="notice" role="alert">{message}</p>}
+      {identity.permissions.includes("crm:read") && (
+        <nav aria-label="工作空间">
+          <Link className="button-primary inline-block" href="/crm">客户 CRM</Link>
+        </nav>
+      )}
       {seeUsers && <Users response={userItems} />}
       {seeAudit && <Audit response={auditItems} />}
     </main>

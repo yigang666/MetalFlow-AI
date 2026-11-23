@@ -1,20 +1,9 @@
 "use server";
 
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { checkedOrigin } from "./server-session";
 import { apiRequest, readResponse, record, sessionCookie, sessionLifetime, sessionPattern } from "./api";
-
-async function checkedOrigin() {
-  const origin = new URL(process.env.APP_ORIGIN ?? "http://localhost:3000");
-  const loopback = ["localhost", "127.0.0.1", "[::1]"].includes(origin.hostname);
-  if (origin.protocol !== "https:" && (origin.protocol !== "http:" || !loopback)) {
-    redirect("/?status=origin");
-  }
-  if ((await headers()).get("origin") !== origin.origin) {
-    redirect("/?status=origin");
-  }
-  return origin;
-}
 
 export async function signIn(form: FormData) {
   const origin = await checkedOrigin();

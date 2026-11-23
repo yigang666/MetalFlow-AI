@@ -29,3 +29,10 @@
 - 最终隔离 Compose 验收在数据库回滚及重新升级前后各 18 项通过。Chrome 通过五组验收，应用新旧镜像切换和恢复均实测通过。[Compose](build/phase-1/compose-verify.log) · [Chrome](build/phase-1/browser-smoke.log) · [镜像回滚](build/phase-1/image-rollout.log)
 - Ruff、mypy、ESLint、TypeScript、依赖复检、独立代码与安全审查通过。GitHub 托管 CI 为 NOT RUN。[质量检查](build/phase-1/quality-gates.log) · [审查](build/phase-1/review.md)
 - [交付报告](../reports/PHASE_1.md)已发布至本地工作区。Phase 2 等待明确批准。
+
+## 2026-11-24 Phase 2 本地验收
+
+- 本机从已种入用户的 Phase 1 升级与降级验证通过，重新升级前后各 38 项通过。[日志](build/phase-2/postgres-crm.log)
+- 最终 Compose 迁移回滚前后各 38 项通过，CRM Chrome 4 组，Phase 1 Chrome 回归 5 组通过。[Compose](build/phase-2/compose.log) · [CRM](build/phase-2/browser.log) · [认证回归](build/phase-2/foundation-browser-regression.log)
+- 独立审查、前后端代码质量和 Python 运行依赖复检通过。[审查](build/phase-2/review.md) · [质量检查](build/phase-2/quality.log)
+- [Phase 2 交付报告](../reports/PHASE_2.md)已保存。实际客户样本仍待验收，Phase 3 等待明确批准。

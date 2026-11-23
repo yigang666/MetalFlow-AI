@@ -2,6 +2,7 @@
 
 import hashlib
 import hmac
+import json
 import os
 import secrets
 from dataclasses import dataclass
@@ -24,11 +25,13 @@ engine = create_engine(
 app = FastAPI(title="MetalFlow AI Sandbox")
 api = "/api/v1"
 bearer = HTTPBearer(auto_error=False)
+crm_staff = ("crm:read", "crm:write")
+crm_managers = (*crm_staff, "crm:assign", "crm:import")
 permissions_by_role = {
-    "owner": ("users:read", "audit:read"),
-    "admin": ("users:read",),
+    "owner": ("users:read", "audit:read", *crm_managers),
+    "admin": ("users:read", *crm_managers),
     "auditor": ("audit:read",),
-    "sales": (),
+    "sales": crm_staff,
 }
 
 
@@ -69,6 +72,8 @@ class AuditView(BaseModel):
     action: str
     outcome: str
     occurred_at: datetime
+    resource_id: UUID | None
+    details: dict[str, str] | None
 
 
 class UserPage(BaseModel):
@@ -182,11 +187,18 @@ def authorize_token(
 CurrentIdentity = Annotated[Identity, Depends(authorize_token)]
 
 
-def audit(connection, identity, action, outcome):
+def audit(
+    connection: Session,
+    identity: Identity,
+    action: str,
+    outcome: str,
+    resource_id: UUID | None = None,
+    details: dict[str, str] | None = None,
+):
     connection.execute(
         text("""
-            INSERT INTO audit_logs (id, tenant_id, actor_id, action, outcome, occurred_at)
-            VALUES (:id, :tenant_id, :actor_id, :action, :outcome, now())
+            INSERT INTO audit_logs (id, tenant_id, actor_id, action, outcome, occurred_at, resource_id, details)
+            VALUES (:id, :tenant_id, :actor_id, :action, :outcome, now(), :resource_id, CAST(:details AS jsonb))
         """),
         {
             "id": uuid4(),
@@ -194,6 +206,8 @@ def audit(connection, identity, action, outcome):
             "actor_id": identity.id,
             "action": action,
             "outcome": outcome,
+            "resource_id": resource_id,
+            "details": json.dumps(details) if details is not None else None,
         },
     )
 
@@ -239,6 +253,10 @@ def health():
                     UNION ALL SELECT 1 FROM users WHERE false
                     UNION ALL SELECT 1 FROM sessions WHERE false
                     UNION ALL SELECT 1 FROM audit_logs WHERE false
+                    UNION ALL SELECT 1 FROM customers WHERE false
+                    UNION ALL SELECT 1 FROM customer_contacts WHERE false
+                    UNION ALL SELECT 1 FROM follow_up_tasks WHERE false
+                    UNION ALL SELECT 1 FROM crm_import_batches WHERE false
                 """)
             )
     except SQLAlchemyError:
@@ -347,10 +365,19 @@ def audit_logs(
     require_permission(connection, identity, "audit:read")
     rows = connection.execute(
         text("""
-            SELECT id, actor_id, action, outcome, occurred_at FROM audit_logs
+            SELECT id, actor_id, action, outcome, occurred_at, resource_id, details FROM audit_logs
             WHERE tenant_id = :tenant_id ORDER BY occurred_at DESC, id DESC
             LIMIT :limit OFFSET :offset
         """),
         {"tenant_id": identity.tenant_id, "limit": limit, "offset": offset},
     ).mappings()
     return {"items": [dict(row) for row in rows]}
+
+
+def install_crm() -> None:
+    from app.crm import router
+
+    app.include_router(router)
+
+
+install_crm()

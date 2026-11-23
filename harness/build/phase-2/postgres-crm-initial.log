@@ -1,0 +1,75 @@
+waiting for server to start.... done
+server started
+postgres (PostgreSQL) 16.13 (Homebrew)
+Python 3.12.13
+Upgrading seeded Phase 1 database to Phase 2
+0002_crm (head)
+============================= test session starts ==============================
+platform darwin -- Python 3.12.13, pytest-9.2.0, pluggy-1.7.0 -- <test-venv>/bin/python
+rootdir: <workspace>/backend
+plugins: platformdirs-4.14.8, anyio-4.16.0
+collecting ... collected 31 items
+
+tests/test_crm.py::test_customer_contact_follow_up_and_assignment PASSED [  3%]
+tests/test_crm.py::test_crm_role_requirements_and_upload_limits PASSED   [  6%]
+tests/test_crm.py::test_excel_preview_duplicate_confirmation_and_replay FAILED [  9%]
+tests/test_crm.py::test_concurrent_import_retry_creates_one_customer PASSED [ 12%]
+tests/test_crm.py::test_crm_rls_without_scope_and_cross_tenant_writes PASSED [ 16%]
+tests/test_crm_import_unit.py::test_parse_text_fields_and_preserve_phone_zeroes PASSED [ 19%]
+tests/test_crm_import_unit.py::test_file_level_template_validation PASSED [ 22%]
+tests/test_crm_import_unit.py::test_row_errors_do_not_invalidate_the_workbook PASSED [ 25%]
+tests/test_crm_import_unit.py::test_duplicate_suggestions_cover_existing_and_workbook_rows PASSED [ 29%]
+tests/test_crm_import_unit.py::test_unsupported_archive_and_expansion_limits PASSED [ 32%]
+tests/test_crm_import_unit.py::test_reject_formula_external_relationship_and_dtd PASSED [ 35%]
+tests/test_crm_import_unit.py::test_reject_unexpected_multiletter_column PASSED [ 38%]
+tests/test_crm_import_unit.py::test_read_rich_shared_strings_used_by_excel PASSED [ 41%]
+tests/test_foundation.py::test_readiness_and_auth_required PASSED        [ 45%]
+tests/test_foundation.py::test_generic_invalid_credentials_and_disabled PASSED [ 48%]
+tests/test_foundation.py::test_changes_apply_to_existing_sessions PASSED [ 51%]
+tests/test_foundation.py::test_invalid_input_does_not_echo_password PASSED [ 54%]
+tests/test_foundation.py::test_role_matrix[owner-200-200] PASSED         [ 58%]
+tests/test_foundation.py::test_role_matrix[admin-200-403] PASSED         [ 61%]
+tests/test_foundation.py::test_role_matrix[sales-403-403] PASSED         [ 64%]
+tests/test_foundation.py::test_role_matrix[auditor-403-200] PASSED       [ 67%]
+tests/test_foundation.py::test_bidirectional_tenant_isolation_and_scope_spoofing PASSED [ 70%]
+tests/test_foundation.py::test_pagination_validation PASSED              [ 74%]
+tests/test_foundation.py::test_refresh_is_single_use_and_logout_revokes PASSED [ 77%]
+tests/test_foundation.py::test_denial_audit_is_visible_only_in_same_tenant PASSED [ 80%]
+tests/test_foundation.py::test_rls_fails_closed_and_transaction_scope_resets PASSED [ 83%]
+tests/test_foundation.py::test_rls_rejects_cross_tenant_insert_and_audit_mutation PASSED [ 87%]
+tests/test_foundation.py::test_session_uses_digest_and_expired_session_is_rejected PASSED [ 90%]
+tests/test_security_unit.py::test_scrypt_password_vector PASSED          [ 93%]
+tests/test_security_unit.py::test_scrypt_password_match_is_exact PASSED  [ 96%]
+tests/test_security_unit.py::test_session_digest_is_sha256 PASSED        [100%]
+
+=================================== FAILURES ===================================
+_____________ test_excel_preview_duplicate_confirmation_and_replay _____________
+
+runtime = (<starlette.testclient.TestClient object at 0x10c429a00>, Engine(postgresql+psycopg://metaflow_app@/metalflow_crm_sandbox?host=<test-socket>&port=55502))
+
+    def test_excel_preview_duplicate_confirmation_and_replay(runtime):
+        client, _ = runtime
+        owner = auth(client)
+        tenant_b = auth(client, TENANT_B)
+        tag = uuid4().hex
+        candidate = f"Existing {tag}"
+        original = create(client, owner, candidate)
+        brand = f"Workbook {tag}"
+        data = workbook(
+            (brand, "SG", "", "Lee", "lee@example.test", "001234", ""),
+            (candidate, "SG", "", "", "", "", ""),
+            ("", "SG", "", "", "", "", ""),
+        )
+        preview = import_request(client, owner, data)
+        assert preview.status_code == 200, preview.text
+        by_row = {row["row"]: row for row in preview.json()["rows"]}
+>       assert by_row[2]["status"] == "ready"
+E       AssertionError: assert 'duplicate' == 'ready'
+E
+E         - ready
+E         + duplicate
+
+tests/test_crm.py:197: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_crm.py::test_excel_preview_duplicate_confirmation_and_replay
+========================= 1 failed, 30 passed in 7.12s =========================

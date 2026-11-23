@@ -89,3 +89,7 @@
 ## Phase 1 Sandbox 实现
 
 [已冻结的 Sandbox 合同](../tasks/PHASE_1.md)记录请求、主字段和角色权限。运行 API 后，`/openapi.json` 和 `/docs` 提供可执行实现生成的 OpenAPI。邀请、用户写操作及后续业务接口保留设计状态。
+
+## Phase 2 Sandbox 实现
+
+[Phase 2 合同](../tasks/PHASE_2.md)定义 Customer 360、负责人、联系人、跟进和 XLSX 导入请求。前序审计列表增加可空资源 ID 和审计详情字段，负责人变更记录前后负责人 ID。通用客户更新/删除、通讯记录与 CRM 业务字段映射留作后续确认。

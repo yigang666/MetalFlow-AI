@@ -8,15 +8,21 @@ export const sessionPattern = /^[a-f0-9-]{36}\.[A-Za-z0-9_-]{43}$/;
 
 type Endpoint = "/auth/login" | "/auth/logout" | "/me" | "/tenant" | "/users" | "/audit-logs";
 
-export async function apiRequest(path: Endpoint, token?: string, body?: object) {
+async function request(
+  path: string,
+  method: string,
+  token?: string,
+  body?: string | ArrayBuffer,
+  contentType?: string,
+) {
   try {
     return await fetch(new URL(`/api/v1${path}`, apiBase), {
-      method: path.startsWith("/auth/") ? "POST" : "GET",
+      method,
       headers: {
         ...(token ? { authorization: `Bearer ${token}` } : {}),
-        ...(body ? { "content-type": "application/json" } : {}),
+        ...(contentType ? { "content-type": contentType } : {}),
       },
-      body: body ? JSON.stringify(body) : undefined,
+      body,
       cache: "no-store",
       redirect: "error",
       signal: AbortSignal.timeout(5000),
@@ -24,6 +30,33 @@ export async function apiRequest(path: Endpoint, token?: string, body?: object) 
   } catch {
     return null;
   }
+}
+
+export function apiRequest(path: Endpoint, token?: string, body?: object) {
+  return request(
+    path, path.startsWith("/auth/") ? "POST" : "GET", token,
+    body ? JSON.stringify(body) : undefined,
+    body ? "application/json" : undefined,
+  );
+}
+
+type CrmEndpoint = "/customers" | `/customers/${string}` | `/customers?${string}`;
+
+export const xlsxContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+export function crmRequest(
+  path: CrmEndpoint,
+  token: string,
+  method: "GET" | "POST" | "PATCH" = "GET",
+  body?: object | ArrayBuffer,
+) {
+  return request(
+    path,
+    method,
+    token,
+    body instanceof ArrayBuffer ? body : body ? JSON.stringify(body) : undefined,
+    body instanceof ArrayBuffer ? xlsxContentType : body ? "application/json" : undefined,
+  );
 }
 
 export async function readResponse<T>(

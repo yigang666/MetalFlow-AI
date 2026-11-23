@@ -41,3 +41,7 @@ table { width: 100%; border-collapse: collapse; text-align: start; }
 th, td { padding: .65rem .8rem .65rem 0; text-align: start; border-bottom: 1px solid var(--line); }
 th { color: var(--muted); font-size: .85rem; font-weight: 650; }
 tr:last-child td { border-bottom: 0; }
+
+.crm-link { color: var(--green-dark); text-decoration: underline; text-underline-offset: .18em; }
+.crm-success { padding: .65rem .8rem; border: 1px solid #9ebbab; border-radius: .45rem; background: #edf6f0; color: var(--green-dark); }
+button:disabled { opacity: .6; cursor: wait; }

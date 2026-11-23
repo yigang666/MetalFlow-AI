@@ -1,0 +1,5 @@
+PASS invalid login shows feedback and creates no browser session
+PASS tenant A Owner sees scoped users and audit; HttpOnly session survives reload
+PASS browser logout clears cookie and API revokes the server session
+PASS tenant B Sales and Auditor see role-appropriate views
+PASS native same-origin forms support login and logout without JavaScript

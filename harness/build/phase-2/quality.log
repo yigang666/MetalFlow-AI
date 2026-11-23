@@ -1,0 +1,9 @@
+All checks passed!
+Success: no issues found in 10 source files
+
+> metalflow-frontend@0.1.0 lint
+> eslint .
+
+
+> metalflow-frontend@0.1.0 typecheck
+> tsc --noEmit --incremental false

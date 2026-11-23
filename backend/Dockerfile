@@ -21,6 +21,7 @@ FROM runtime AS test
 USER root
 COPY requirements-dev.txt ./
 RUN pip install --disable-pip-version-check --no-cache-dir -r requirements-dev.txt
+COPY ruff.toml ./
 COPY tests ./tests
 USER metaflow
 CMD ["sh", "-ec", "ruff check --no-cache app tests && mypy --check-untyped-defs --cache-dir=/dev/null app && python -m pytest -p no:cacheprovider tests"]
